@@ -1,0 +1,24 @@
+<div class="bg-white h-lvh self-end p-16 w-[35vw] max-lg:w-[100vw]">
+    <svg (click)="onClose()" class="size-6" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" height="800px" width="800px" version="1.1"
+        id="Layer_1" viewBox="0 0 512 512" xml:space="preserve">
+        <g>
+            <g>
+                <polygon
+                    points="512,59.076 452.922,0 256,196.922 59.076,0 0,59.076 196.922,256 0,452.922 59.076,512 256,315.076 452.922,512     512,452.922 315.076,256   " />
+            </g>
+        </g>
+    </svg>
+    <div class="flex items-center justify-between my-8">
+        <h1 class="text-3xl">Login</h1>
+        <img class="size-40"
+            src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/Image-login_btpq7r" alt="">
+    </div>
+    <input [(ngModel)]="email" class="focus:outline-none border border-slate-500 p-6 rounded-lg w-full"
+        placeholder="Email" type="email" />
+    <input [(ngModel)]="password" class="mt-4 focus:outline-none border border-slate-500 p-6 rounded-lg w-full"
+        placeholder="Password" type="password" />
+    <button (click)="onSignIn()"
+        class="mt-16 bg-orange-600 rounded-xl text-white font-bold p-6 w-full text-2xl">Login</button>
+    <p>*Any username password will be accepted. Since I'm using mockapi</p>
+</div>

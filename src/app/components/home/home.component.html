@@ -1,28 +1,35 @@
 <main>
     <section class="bg-orange-600 h-lvh">
-        <nav class=" flex justify-between mb-8 p-8 px-44">
+        <nav class=" flex justify-between mb-8 p-8 px-8 xl:px-44">
             <img class="h-12"
                 src="https://res.cloudinary.com/dutdah0l9/image/upload/v1720058694/Swiggy_logo_bml6he.png" />
             <div class="flex justify-around items-center w-1/2">
-                <a class="font-bold text-white">Swiggy Corporate</a>
-                <a class="font-bold text-white">Partner with us</a>
-                <button class="bg-transparent border border-white rounded-xl text-white font-bold p-4 w-40">Get The
+                <a class="font-bold text-white max-md:hidden">Swiggy Corporate</a>
+                <a class="font-bold text-white max-md:hidden" s>Partner with us</a>
+                <button
+                    class="bg-transparent border border-white rounded-xl text-white font-bold p-4 w-40 max-md:hidden">Get
+                    The
                     App</button>
-                <button class="bg-black rounded-xl text-white font-bold p-4 w-40">
-                    Sign In</button>
+                <div *ngIf="!loginStatus; else loggedInContext">
+                    <button class="bg-black rounded-xl text-white font-bold p-4 w-40" (click)="onSigninClick()">
+                        Sign In</button>
+                </div>
+                <ng-template #loggedInContext>
+                    <p class="text-white font-bold">Welcome! <br> You Are Signed In</p>
+                </ng-template>
             </div>
         </nav>
-        <div class="flex w-full justify-between">
-            <img class="h-[450px] w-[250px]"
+        <div class="flex w-full xl:justify-between justify-center">
+            <img class="h-[450px] w-[250px] max-xl:hidden"
                 src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/portal/testing/seo-home/Veggies_new.png" />
             <div class="text-center">
                 <h1 class="text-5xl text-white font-bold my-8">Order food & groceries. Discover <br> best restaurants.
                     Swiggy
                     it!
                 </h1>
-                <div class="flex">
+                <div class="flex max-md:flex-col max-md:items-center">
                     <div
-                        class="bg-white p-4 flex justify-between items-center rounded-xl border border-gray-400 w-1/2 mr-4">
+                        class="bg-white p-4 flex justify-between items-center rounded-xl border border-gray-400 w-1/2 m-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 18 23" fill="none">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                 d="M10.115 21.8122C12.4772 19.4062 17.7886 13.4751 17.7886 8.78883C17.7886 3.79647 13.9976 0 9.00526 0C4.0129 0 0.210938 3.79647 0.210938 8.78883C0.210938 13.4755 5.52998 19.4073 7.89476 21.8129C8.51149 22.4403 9.49871 22.44 10.115 21.8122ZM8.99988 12.7888C11.4269 12.7888 13.3943 10.8214 13.3943 8.39441C13.3943 5.96745 11.4269 4 8.99988 4C6.57292 4 4.60547 5.96745 4.60547 8.39441C4.60547 10.8214 6.57292 12.7888 8.99988 12.7888Z"
@@ -36,7 +43,7 @@
                                 fill="rgba(2, 6, 12, 0.92)" fill-opacity="0.92"></path>
                         </svg>
                     </div>
-                    <div class="w-2/3 bg-white flex justify-between p-4 rounded-xl border border-gray-400">
+                    <div class="w-2/3 bg-white flex justify-between p-4 rounded-xl border border-gray-400 m-2">
                         <input class="w-64 focus:outline-none" placeholder="Search for restaurant, item or more" />
                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100"
                             viewBox="0 0 50 50" fillColor="rgba(2, 6, 12, 0.92)" class="size-6">
@@ -47,11 +54,11 @@
                     </div>
                 </div>
             </div>
-            <img class="h-[450px] w-[250px]"
+            <img class="h-[450px] w-[250px] max-xl:hidden"
                 src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/portal/testing/seo-home/Sushi_replace.png" />
 
         </div>
-        <div class="px-44 flex -mt-48">
+        <div class="px-8 xl:px-44 flex xl:-mt-48">
             <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/MERCHANDISING_BANNERS/IMAGES/MERCH/2024/8/1/fa01e85b-3057-482d-9523-5289722b1df2_Food4BU.png"
                 class="w-1/4 hover:cursor-pointer" />
             <img src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/MERCHANDISING_BANNERS/IMAGES/MERCH/2024/8/16/ca34e375-f1bd-4a2e-a3e7-0a20833be83b_IM4BU1.png"
@@ -62,7 +69,7 @@
                 class="w-1/4 hover:cursor-pointer" />
         </div>
     </section>
-    <section class="px-44 py-36">
+    <section class="px-8 xl:px-44 py-36">
         <div class="flex">
             <svg (click)="scrollToPrev('order', ordersID)"
                 class="bg-gray-300 p-2 rounded-full mr-4 rotate-180 hover:cursor-pointer"
@@ -92,7 +99,7 @@
             </div>
         </div>
     </section>
-    <section class="px-44">
+    <section class="px-8 xl:px-44">
         <div class="flex">
             <svg (click)="scrollToPrev('grocerie', grocerieID)"
                 class="bg-gray-300 p-2 rounded-full mr-4 rotate-180 hover:cursor-pointer"
@@ -120,4 +127,83 @@
     </section>
     <img class="py-16"
         src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/portal/m/seo/App_download_banner.png" />
+    <section class="px-8 xl:px-44">
+        <h1 class="text-2xl font-bold">Cities with food delivery</h1>
+        <div class="flex flex-wrap">
+            <div class="w-1/4" *ngFor="let city of cities">
+                <button class="w-11/12 m-2 rounded-xl p-4 border border-gray-500">Order Food Online in {{city}}</button>
+            </div>
+            <button class="w-[22.9%] m-2 rounded-xl p-4 border border-gray-500 text-orange-600 font-bold">Show
+                More</button>
+        </div>
+    </section>
+    <footer class="pt-16 bg-slate-300 px-8 xl:px-44 mt-16 text-slate-500">
+        <div class="flex justify-between">
+            <div>
+                <img src="https://media-assets.swiggy.com/portal/testing/seo-home/Group.svg" />
+                <p>{{'@'}} 2024 Swiggy Limited</p>
+            </div>
+            <div class="flex flex-col">
+                <a href="#" class="font-bold text-slate-800">Company</a>
+                <a href="#">About Us</a>
+                <a href="#">Swiggy Corporate</a>
+                <a href="#">Careers</a>
+                <a href="#">Team</a>
+                <a href="#">Swiggy One</a>
+                <a href="#">Swiggy Instamart</a>
+                <a href="#">Swiggy Dineout</a>
+                <a href="#">Swiggy Genie</a>
+                <a href="#">Minis</a>
+            </div>
+            <div class="flex flex-col">
+                <a href="#" class="font-bold text-slate-800">Contact Us</a>
+                <a href="#">Help & Support</a>
+                <a href="#">Partner With Us</a>
+                <a href="#">Ride With Us</a>
+                <a href="#" class="font-bold text-slate-800 mt-4">Legal</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Coockie Policy</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="flex flex-col">
+                <a href="#" class="font-bold text-slate-800">Available in:</a>
+                <a href="#">Bangalore</a>
+                <a href="#">Gurugaon</a>
+                <a href="#">Hyderabad</a>
+                <a href="#">Delhi</a>
+                <a href="#">Mumbai</a>
+                <a href="#">Pune</a>
+            </div>
+            <div class="flex flex-col">
+                <a href="#" class="font-bold text-slate-800">Life at Swiggy</a>
+                <a href="#">Explore With Swiggy</a>
+                <a href="#">Swiggy News</a>
+                <a href="#">Snackables</a>
+
+                <a href="#" class="font-bold text-slate-800">Social Links</a>
+                <div class="flex">
+                    <img src="https://media-assets.swiggy.com/portal/testing/seo-home/Linkedin.svg"
+                        class="hover:cursor-pointer size-4" />
+                    <img src="https://media-assets.swiggy.com/portal/testing/seo-home/icon-instagram.svg"
+                        class="hover:cursor-pointer size-4" />
+                    <img src="https://media-assets.swiggy.com/portal/testing/seo-home/icon-facebook.svg"
+                        class="hover:cursor-pointer size-4" />
+                    <img src="https://media-assets.swiggy.com/portal/testing/seo-home/icon-pinterest.svg"
+                        class="hover:cursor-pointer size-4" />
+                </div>
+            </div>
+        </div>
+        <hr class="my-8 h-0.5 bg-black">
+        <div class="pb-8 flex justify-around items-center">
+            <h1 class="text-slate-900 font-bold text-2xl">For Better Experience Download the Swiggy App Now!</h1>
+            <button><img
+                    src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_200,h_65/icon-AppStore_lg30tv" /></button>
+            <button><img
+                    src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_200,h_65/icon-GooglePlay_1_zixjxl" /></button>
+        </div>
+    </footer>
+    <div class="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm z-40 {{signinStatus}} flex justify-end">
+        <app-signin [signinStatus]="signinStatus" (status)="onClose($event)" [loginStatus]="loginStatus"
+            (lstatus)="onLoginChange($event)"></app-signin>
+    </div>
 </main>

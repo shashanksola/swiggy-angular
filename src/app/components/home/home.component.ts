@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Card } from '../../Card';
 import { CardComponent } from "../card/card.component";
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
+import { SigninComponent } from "../signin/signin.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CardComponent, NgFor],
+  imports: [CardComponent, NgFor, SigninComponent, NgIf],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -62,8 +63,40 @@ export class HomeComponent {
     { imageURL: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/PC_Mweb/Burger.png" }
   ];
 
+  cities: String[] = [
+    "Mumbai",
+    "Delhi",
+    "Bengaluru",
+    "Kolkata",
+    "Chennai",
+    "Hyderabad",
+    "Ahmedabad",
+    "Pune",
+    "Jaipur",
+    "Lucknow",
+    "Chandigarh"
+  ];
+
+
   grocerieID: number = 0;
   ordersID: number = 0;
+
+  signinStatus: string = 'hidden';
+  loginStatus: boolean = false;
+
+  onSigninClick() {
+    this.signinStatus = 'no-doc-scroll'
+  }
+
+  onClose(status: string) {
+    this.signinStatus = status;
+  }
+
+  onLoginChange(lstatus: boolean) {
+    this.loginStatus = lstatus;
+  }
+
+
 
   scrollToNext(item: String, id: number) {
     if (item === "grocerie") {
