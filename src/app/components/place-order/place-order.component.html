@@ -17,7 +17,7 @@
                     </defs>
                 </svg></a>
             <div class="flex items-center">
-                <p class="text-slate-800 border-b-2 border-slate-800 pb-1 mr-2 font-bold">Other</p>
+                <p class="text-slate-800 border-b-2 border-slate-800 pb-1 mr-2 font-bold">Hyderabad</p>
                 <svg width="20" height="20" viewBox="0 0 20 21" fill="none" aria-label="rating-down-down-icon"
                     aria-hidden="false" strokeColor="rgba(2, 6, 12, 0.92)" fillColor="rgba(2, 6, 12, 0.92)">
                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -107,10 +107,59 @@
                     class="p-4 bg-black text-white min-w-48 rounded-xl mr-4 min-h-[290px] flex flex-col justify-between">
                     <p class="text-xl">{{dish.title}}</p>
                     <p class="text-xs text-slate-400 py-2">{{dish.description}}</p>
-                    <img src="{{dish.src}}" />
+                    <img [src]="dish.src" />
                     <div class="flex justify-between items-center -mt-8">
                         <p>{{dish.price}}</p>
-                        <button class="bg-white text-green-600 font-bold p-2 rounded-md">Add Item</button>
+
+                        <!-- Conditionally show buttons based on quantity -->
+                        <button *ngIf="dish.quantity === 0" (click)="addItem(dish)"
+                            class="bg-white text-green-600 font-bold p-2 rounded-md">
+                            Add Item
+                        </button>
+                        <div *ngIf="dish.quantity > 0" class="flex items-center">
+                            <button (click)="removeItem(dish)"
+                                class="bg-red-500 text-white font-bold p-2 rounded-l-md">-</button>
+                            <span class="px-2">{{dish.quantity}}</span>
+                            <button (click)="addItem(dish)"
+                                class="bg-green-500 text-white font-bold p-2 rounded-r-md">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="px-96 pb-10 max-xl:px-16">
+        <h1 class="font-bold text-2xl mb-4">Recommended Dishes</h1>
+        <div>
+            <div *ngFor="let dish of recomendedDishes">
+                <div class="p-4 bg-slate-300 text-black rounded-xl mr-4 my-4">
+                    <div class="flex">
+                        <img [src]="dish.src" class="h-44" />
+                        <div class="ml-4">
+                            <p class="text-xl font-bold">{{ dish.title }}</p>
+                            <p class="text-lg text-slate-700 py-2">{{ dish.description }}</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-end items-center -mt-8">
+                        <p class="mr-4">{{ dish.price }}</p>
+
+                        <!-- Conditional Button Display -->
+                        <ng-container *ngIf="dish.quantity === 0; else quantityControls">
+                            <button (click)="addItem(dish)"
+                                class="bg-white text-green-600 font-bold p-2 rounded-md ml-4">
+                                Add Item
+                            </button>
+                        </ng-container>
+                        <!-- Quantity Controls -->
+                        <ng-template #quantityControls>
+                            <div class="flex items-center">
+                                <button (click)="removeItem(dish)"
+                                    class="bg-white text-red-600 font-bold p-2 rounded-md">-</button>
+                                <span class="mx-2">{{ dish.quantity }}</span>
+                                <button (click)="addItem(dish)"
+                                    class="bg-white text-green-600 font-bold p-2 rounded-md">+</button>
+                            </div>
+                        </ng-template>
                     </div>
                 </div>
             </div>
