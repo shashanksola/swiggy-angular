@@ -7,7 +7,7 @@ import { User } from '../components/signin/User';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://mockapi.io/your-endpoint'; // Replace with your actual API URL
+  private apiUrl = 'https://6717d39db910c6a6e02a29fc.mockapi.io';
 
   constructor(public http: HttpClient) { }
 

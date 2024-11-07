@@ -17,10 +17,10 @@ export class SigninComponent {
   password: string = '';
   isRegistering: boolean = false;
 
-  @Input() signinStatus!: string;
-  @Input() loginStatus!: boolean;
+  @Input() openStatus!: string;
+  @Input() loginStatus!: string;
   @Output() status = new EventEmitter<string>();
-  @Output() lstatus = new EventEmitter<boolean>();
+  @Output() lstatus = new EventEmitter<string>();
 
   constructor(private authService: AuthService) { }
 
@@ -42,12 +42,14 @@ export class SigninComponent {
     this.authService.register(user).subscribe({
       next: (response) => {
         console.log('Registration successful:', response);
-        this.status.emit('registered');
-        this.lstatus.emit(true);
+        this.status.emit('hidden');
+        this.lstatus.emit(this.email);
+        localStorage.setItem('user', this.email);
       },
       error: (error) => {
         console.error('Registration failed:', error);
-        this.status.emit('register_failed');
+        this.lstatus.emit('Your are not logged in');
+        localStorage.removeItem('user');
       }
     });
   }
@@ -58,13 +60,14 @@ export class SigninComponent {
     this.authService.login(user).subscribe({
       next: (response) => {
         console.log('Login successful:', response);
-        this.status.emit('logged_in');
-        this.lstatus.emit(true);
+        this.status.emit('hidden');
+        this.lstatus.emit(this.email);
+        localStorage.setItem('user', this.email);
       },
       error: (error) => {
         console.error('Login failed:', error);
-        this.status.emit('login_failed');
-        this.lstatus.emit(false);
+        this.lstatus.emit('Your are not logged in');
+        localStorage.removeItem('user');
       }
     });
   }

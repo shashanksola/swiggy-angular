@@ -26,8 +26,6 @@
         {{ isRegistering ? 'Register' : 'Login' }}
     </button>
 
-    <p *ngIf="!loginStatus" class="text-red-600 text-center mt-4">Invalid email or password. Please try again.</p>
-
     <p class="mt-4 text-center">
         <span *ngIf="!isRegistering" (click)="toggleMode()" class="cursor-pointer text-blue-500">Don't have an account?
             Register</span>

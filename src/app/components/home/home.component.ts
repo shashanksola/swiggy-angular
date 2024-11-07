@@ -4,14 +4,16 @@ import { CardComponent } from "../card/card.component";
 import { NgFor, NgIf } from '@angular/common';
 import { SigninComponent } from "../signin/signin.component";
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CardComponent, NgFor, SigninComponent, NgIf, HttpClientModule],
+  imports: [CardComponent, NgFor, SigninComponent, NgIf, HttpClientModule, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
+
 export class HomeComponent {
 
   groceries: Card[] = [
@@ -78,26 +80,23 @@ export class HomeComponent {
     "Chandigarh"
   ];
 
-
   grocerieID: number = 0;
   ordersID: number = 0;
 
-  signinStatus: string = 'hidden';
-  loginStatus: boolean = false;
+  openStatus: string = 'hidden';
+  loginStatus: string = '';
 
   onSigninClick() {
-    this.signinStatus = 'no-doc-scroll'
+    this.openStatus = 'no-doc-scroll'
   }
 
   onClose(status: string) {
-    this.signinStatus = status;
+    this.openStatus = status;
   }
 
-  onLoginChange(lstatus: boolean) {
+  onLoginChange(lstatus: string) {
     this.loginStatus = lstatus;
   }
-
-
 
   scrollToNext(item: String, id: number) {
     if (item === "grocerie") {
