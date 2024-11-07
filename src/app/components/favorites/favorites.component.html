@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+<section class="px-96 py-10 max-xl:px-16">
+    <!-- Check if there are any favorite dishes to show -->
+    <div *ngIf="favoriteDishes.length > 0; else noFavorites">
+        <h1 class="font-bold text-2xl mb-4">Your Favorite Dishes</h1>
+        <div *ngFor="let dish of favoriteDishes" class="p-4 bg-slate-300 text-black rounded-xl mr-4 my-4">
+            <div class="flex justify-around">
+                <img [src]="dish.src" class="h-44" alt="{{ dish.title }} image" />
+
+                <div class="ml-4">
+                    <p class="text-xl font-bold">{{ dish.title }}</p>
+                    <p class="text-lg text-slate-700 py-2">{{ dish.description }}</p>
+                    <p class="text-md font-semibold">{{ dish.price }}</p>
+
+                    <!-- Remove from favorites button -->
+                    <button (click)="removeFavorite(dish.id)"
+                        class="bg-red-500 text-white font-bold p-2 rounded-md mt-2">
+                        Remove from Favorites
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fallback message if no favorite dishes -->
+    <ng-template #noFavorites>
+        <p class="text-lg text-slate-800 font-bold">You have no favorite dishes.</p>
+        <button class="bg-orange-600 rounded-md text-xl text-white font-semibold p-4 mt-4" routerLink="/order">Browse
+            Restaurants</button>
+    </ng-template>
+</section>

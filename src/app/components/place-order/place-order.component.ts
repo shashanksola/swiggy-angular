@@ -42,6 +42,8 @@ export class PlaceOrderComponent implements OnInit {
     { quantity: 0, id: 20, src: "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/PC_Mweb/Burger.png", title: "Burger", price: "₹100", description: "Juicy burger with fillings." }
   ];
 
+  favoriteDishes: Dish[] = [];
+
   constructor(private cartService: CartService, private _router: Router) { }
 
   ngOnInit(): void {
@@ -54,7 +56,37 @@ export class PlaceOrderComponent implements OnInit {
     }
 
     this.signinStaus = sigin;
+
+    const savedFavorites = localStorage.getItem('favoriteDishes');
+    if (savedFavorites) {
+      this.favoriteDishes = JSON.parse(savedFavorites);
+      this.markFavorites();
+    }
   }
+
+  markFavorites() {
+    this.dishes.forEach(dish => {
+      dish.favorite = this.favoriteDishes.some(favDish => favDish.id === dish.id);
+    });
+    this.recomendedDishes.forEach(dish => {
+      dish.favorite = this.favoriteDishes.some(favDish => favDish.id === dish.id);
+    });
+  }
+
+  toggleFavorite(dish: Dish) {
+    dish.favorite = !dish.favorite;
+    if (dish.favorite) {
+      this.favoriteDishes.push({ ...dish });
+    } else {
+      const index = this.favoriteDishes.findIndex(favDish => favDish.id === dish.id);
+      if (index !== -1) {
+        this.favoriteDishes.splice(index, 1);
+      }
+    }
+
+    localStorage.setItem('favoriteDishes', JSON.stringify(this.favoriteDishes));
+  }
+
 
   addItem(dish: Dish) {
     dish.quantity++;

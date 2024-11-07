@@ -4,5 +4,6 @@ export type Dish = {
     title: string,
     price: string,
     quantity: number,
-    description: string
+    description: string,
+    favorite?: boolean
 }
