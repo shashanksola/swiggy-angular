@@ -3,11 +3,12 @@ import { Card } from '../../Card';
 import { CardComponent } from "../card/card.component";
 import { NgFor, NgIf } from '@angular/common';
 import { SigninComponent } from "../signin/signin.component";
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CardComponent, NgFor, SigninComponent, NgIf],
+  imports: [CardComponent, NgFor, SigninComponent, NgIf, HttpClientModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -129,5 +130,4 @@ export class HomeComponent {
       el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   }
-
 }

@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
 import { User } from './User';
+import { AuthService } from '../../services/auth-service.service';
 import { NgIf } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +12,6 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
-
 export class SigninComponent {
   email: string = '';
   password: string = '';
@@ -42,45 +39,34 @@ export class SigninComponent {
   onRegister() {
     const user: User = { email: this.email, password: this.password };
 
-    this.authService.register(user.email, user.password).pipe(
-      tap(response => {
-        console.log('User registered successfully:', response);
-        this.loginStatus = true;
+    this.authService.register(user).subscribe({
+      next: (response) => {
+        console.log('Registration successful:', response);
+        this.status.emit('registered');
         this.lstatus.emit(true);
-        this.status.emit('hidden');
-        localStorage.setItem('user', JSON.stringify(response));
-      }),
-      catchError(error => {
-        console.error('Registration failed', error);
-        this.loginStatus = false;
-        this.lstatus.emit(false);
-        localStorage.removeItem('user');
-        return of({ success: false, message: 'Registration failed' });
-      })
-    ).subscribe();
+      },
+      error: (error) => {
+        console.error('Registration failed:', error);
+        this.status.emit('register_failed');
+      }
+    });
   }
 
   onLogin() {
     const user: User = { email: this.email, password: this.password };
 
-    this.authService.login(user.email, user.password).pipe(
-      tap(response => {
-        if (response) {
-          console.log('User logged in successfully:', response);
-          this.loginStatus = true;
-          this.lstatus.emit(true);
-          this.status.emit('hidden');
-          localStorage.setItem('user', JSON.stringify(response));
-        }
-      }),
-      catchError(error => {
-        console.error('Login failed', error);
-        this.loginStatus = false;
+    this.authService.login(user).subscribe({
+      next: (response) => {
+        console.log('Login successful:', response);
+        this.status.emit('logged_in');
+        this.lstatus.emit(true);
+      },
+      error: (error) => {
+        console.error('Login failed:', error);
+        this.status.emit('login_failed');
         this.lstatus.emit(false);
-        localStorage.removeItem('user');
-        return of({ success: false, message: 'Login failed' });
-      })
-    ).subscribe();
+      }
+    });
   }
 
   onClose() {
